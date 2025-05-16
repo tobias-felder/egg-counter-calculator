@@ -107,10 +107,10 @@ app.post('/api/send-email', async (req, res) => {
         const msg = {
             to: email,
             from: 'tobias.felder@gmail.com',
-            subject: 'Your Fertility Calculator Results',
+            subject: 'Your Personalized Fertility Report',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h1 style="color: #2c3e50; text-align: center;">Your Fertility Calculator Results</h1>
+                    <h1 style="color: #2c3e50; text-align: center;">Your Personalized Fertility Report</h1>
                     
                     <div style="margin: 20px 0;">
                         <h2 style="color: #34495e;">Age Information</h2>

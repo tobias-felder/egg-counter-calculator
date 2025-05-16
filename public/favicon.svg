@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="16" cy="16" r="15" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+    
+    <!-- Timeline Symbol -->
+    <path d="M8 16 L16 8 L24 16 L16 24 Z" fill="white" stroke="#2980b9" stroke-width="1"/>
+    
+    <!-- Center Dot -->
+    <circle cx="16" cy="16" r="3" fill="#e74c3c"/>
+</svg> 

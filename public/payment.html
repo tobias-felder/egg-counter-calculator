@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-row {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        #card-element {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complete Your Payment</h1>
+    <form id="payment-form">
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-row">
+            <label for="card-element">Credit or debit card</label>
+            <div id="card-element"></div>
+        </div>
+        <div id="error-message"></div>
+        <button type="submit" id="submit-button">Pay Now</button>
+    </form>
+
+    <script>
+        // Initialize Stripe with your publishable key
+        const stripe = Stripe('pk_test_eJCHI5sA9fSYiNHv1nMRo7ur');
+        
+        // Create an instance of Elements
+        const elements = stripe.elements();
+        
+        // Create card Element
+        const card = elements.create('card');
+        card.mount('#card-element');
+        
+        // Handle form submission
+        const form = document.getElementById('payment-form');
+        const submitButton = document.getElementById('submit-button');
+        const errorElement = document.getElementById('error-message');
+        
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            // Disable the submit button
+            submitButton.disabled = true;
+            
+            try {
+                // Create payment method
+                const { paymentMethod, error } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: card,
+                    billing_details: {
+                        email: document.getElementById('email').value
+                    }
+                });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Create payment intent
+                const response = await fetch('/api/payment/create-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value,
+                        plan: 'monthly'
+                    })
+                });
+                
+                const { clientSecret } = await response.json();
+                
+                // Confirm the payment
+                const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+                    clientSecret,
+                    {
+                        payment_method: paymentMethod.id
+                    }
+                );
+                
+                if (confirmError) {
+                    throw confirmError;
+                }
+                
+                if (paymentIntent.status === 'succeeded') {
+                    // Payment successful
+                    alert('Payment successful!');
+                    // Redirect to success page or update UI
+                }
+            } catch (error) {
+                // Show error to user
+                errorElement.textContent = error.message;
+                submitButton.disabled = false;
+            }
+        });
+        
+        // Handle real-time validation errors
+        card.addEventListener('change', (event) => {
+            if (event.error) {
+                errorElement.textContent = event.error.message;
+            } else {
+                errorElement.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-row {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        #card-element {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complete Your Payment</h1>
+    <form id="payment-form">
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-row">
+            <label for="card-element">Credit or debit card</label>
+            <div id="card-element"></div>
+        </div>
+        <div id="error-message"></div>
+        <button type="submit" id="submit-button">Pay Now</button>
+    </form>
+
+    <script>
+        // Initialize Stripe with your publishable key
+        const stripe = Stripe('pk_test_eJCHI5sA9fSYiNHv1nMRo7ur');
+        
+        // Create an instance of Elements
+        const elements = stripe.elements();
+        
+        // Create card Element
+        const card = elements.create('card');
+        card.mount('#card-element');
+        
+        // Handle form submission
+        const form = document.getElementById('payment-form');
+        const submitButton = document.getElementById('submit-button');
+        const errorElement = document.getElementById('error-message');
+        
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            // Disable the submit button
+            submitButton.disabled = true;
+            
+            try {
+                // Create payment method
+                const { paymentMethod, error } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: card,
+                    billing_details: {
+                        email: document.getElementById('email').value
+                    }
+                });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Create payment intent
+                const response = await fetch('/api/payment/create-subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value,
+                        plan: 'monthly'
+                    })
+                });
+                
+                const { clientSecret } = await response.json();
+                
+                // Confirm the payment
+                const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+                    clientSecret,
+                    {
+                        payment_method: paymentMethod.id
+                    }
+                );
+                
+                if (confirmError) {
+                    throw confirmError;
+                }
+                
+                if (paymentIntent.status === 'succeeded') {
+                    // Payment successful
+                    alert('Payment successful!');
+                    // Redirect to success page or update UI
+                }
+            } catch (error) {
+                // Show error to user
+                errorElement.textContent = error.message;
+                submitButton.disabled = false;
+            }
+        });
+        
+        // Handle real-time validation errors
+        card.addEventListener('change', (event) => {
+            if (event.error) {
+                errorElement.textContent = event.error.message;
+            } else {
+                errorElement.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html> 

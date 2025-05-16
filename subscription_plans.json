@@ -1,0 +1,82 @@
+{
+    "subscription_tiers": {
+        "free": {
+            "name": "Free Plan",
+            "price": {
+                "monthly": 0,
+                "yearly": 0
+            },
+            "features": [
+                "Basic egg count calculator",
+                "Basic menstrual cycle tracking",
+                "7-day calculation history",
+                "Limited data export (CSV)"
+            ],
+            "limits": {
+                "calculations_per_day": 3,
+                "history_retention_days": 7
+            }
+        },
+        "basic": {
+            "name": "Basic Plan",
+            "price": {
+                "monthly": 4.99,
+                "yearly": 49.99
+            },
+            "features": [
+                "All Free Plan features",
+                "Unlimited calculations",
+                "30-day calculation history",
+                "Basic trend analysis",
+                "Email notifications",
+                "PDF export option"
+            ],
+            "limits": {
+                "calculations_per_day": "unlimited",
+                "history_retention_days": 30
+            }
+        },
+        "premium": {
+            "name": "Premium Plan",
+            "price": {
+                "monthly": 9.99,
+                "yearly": 99.99
+            },
+            "features": [
+                "All Basic Plan features",
+                "1-year calculation history",
+                "Advanced trend analysis",
+                "Personalized insights",
+                "Priority support",
+                "Multiple export formats",
+                "Custom notifications",
+                "Family planning tools"
+            ],
+            "limits": {
+                "calculations_per_day": "unlimited",
+                "history_retention_days": 365
+            }
+        },
+        "professional": {
+            "name": "Professional Plan",
+            "price": {
+                "monthly": 19.99,
+                "yearly": 199.99
+            },
+            "features": [
+                "All Premium Plan features",
+                "Unlimited history retention",
+                "API access",
+                "Healthcare provider integration",
+                "Multi-device sync",
+                "Advanced analytics dashboard",
+                "White-label reports",
+                "Dedicated support"
+            ],
+            "limits": {
+                "calculations_per_day": "unlimited",
+                "history_retention_days": "unlimited"
+            }
+        }
+    }
+} 

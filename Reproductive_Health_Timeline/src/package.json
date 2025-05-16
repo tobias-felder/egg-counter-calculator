@@ -1,0 +1,19 @@
+{
+  "name": "reproductive-health-timeline",
+  "version": "1.0.0",
+  "description": "Comprehensive fertility tracking application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "prod": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

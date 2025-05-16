@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Reproductive Health Timeline</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Reproductive Health Timeline</h1>
+        <p class="description">Comprehensive fertility tracking with egg count estimation and menstrual cycle prediction</p>
+    </div>
+
+    <div class="feature-list">
+        <div class="feature">
+            <h3>Egg Count Estimation</h3>
+            <p>Get accurate estimates of your current egg count based on age</p>
+        </div>
+        <div class="feature">
+            <h3>Future Projections</h3>
+            <p>See how your reproductive health may change over time</p>
+        </div>
+        <div class="feature">
+            <h3>Comprehensive Tracking</h3>
+            <p>Monitor your reproductive health journey in one place</p>
+        </div>
+    </div>
+
+    <div id="inputArea">
+        <div class="input-section">
+            <h3>Step 1: Egg Count Calculator</h3>
+            <div class="input-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" placeholder="Enter your email for results">
+            </div>
+
+            <!-- Add Email Notification Checkbox -->
+            <div class="input-group">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" id="sendEmail" style="margin-right: 10px;">
+                    Send results to my email
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label for="ageInput">Enter Your Age (Years):</label>
+                <input type="number" id="ageInput" min="18" max="55" placeholder="Enter age">
+            </div>
+        </div>
+        
+        <div class="input-section">
+            <h3>Step 2: Menstrual Cycle Tracker</h3>
+            <div class="input-group">
+                <label for="lastPeriod">Last Period Start:</label>
+                <input type="date" id="lastPeriod">
+            </div>
+            <div class="input-group">
+                <label for="cycleLength">Average Cycle Length (Days):</label>
+                <input type="number" id="cycleLength" min="21" max="35" value="28">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <button id="calculateButton">Calculate</button>
+            <button id="resetButton">Reset</button>
+        </div>
+    </div>
+
+    <div id="currentAgeOutput" class="outputArea">
+        <div class="age-content">
+            <div class="age-label">Current Age:</div>
+            <div>Approximate Egg Count Range: <span id="eggRangeOutput"></span></div>
+            <div class="percentage-info" id="pastPercentage"></div>
+        </div>
+    </div>
+
+    <div class="outputArea">
+        <div class="age-content">
+            <div class="age-label">Age + 5 Years:</div>
+            <div class="age-calculation" id="futureAge"></div>
+            <div>Approximate Egg Count Range: <span id="eggRangeOutputPlus5"></span></div>
+            <div class="percentage-info" id="futurePercentage"></div>
+        </div>
+    </div>
+
+    <div class="outputArea">
+        <div class="age-content">
+            <div class="age-label">Age - 5 Years:</div>
+            <div class="age-calculation" id="pastAge"></div>
+            <div>Approximate Egg Count Range: <span id="eggRangeOutputMinus5"></span></div>
+        </div>
+    </div>
+
+    <div id="cycleOutput" class="outputArea">
+        <div class="age-content">
+            <div class="age-label">Menstrual Cycle Information:</div>
+            <div class="cycle-info" id="nextPeriod"></div>
+            <div class="cycle-info" id="fertileWindow"></div>
+            <div class="cycle-info" id="ovulationDay"></div>
+            <div class="output-area">
+                <h3>Cycle Information</h3>
+                <p id="nextPeriod"></p>
+                <p id="ovulationDay"></p>
+                <p id="fertileWindow"></p>
+                <p id="ovulationTime"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="disclaimer">
+        <p>These are age-based averages only. This calculator does not provide medical advice. Consult a healthcare professional for personalized information. This data is for educational purposes only.</p>
+    </div>
+
+    <script src="script.js?v=3"></script>
+</body>
+</html>

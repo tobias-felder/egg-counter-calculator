@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Hope Fertility Center",
+    "type": "Egg Freezing",
+    "address": "123 Main St, New York, NY",
+    "website": "https://hopefertility.com",
+    "phone": "(555) 123-4567",
+    "description": "Specialists in egg freezing and fertility preservation.",
+    "image": "https://example.com/images/hopefertility.jpg"
+  },
+  {
+    "name": "Donor Life Clinic",
+    "type": "Sperm Donor",
+    "address": "456 Elm St, Los Angeles, CA",
+    "website": "https://donorlife.com",
+    "phone": "(555) 987-6543",
+    "description": "Top-rated sperm donor clinic with nationwide reach.",
+    "image": "https://example.com/images/donorlife.jpg"
+  }
+ 
+]

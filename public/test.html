@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test Results</h1>
+    <div id="results"></div>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        async function testEndpoint(path) {
+            try {
+                const response = await fetch(path);
+                const data = await response.json();
+                return { status: response.status, data };
+            } catch (error) {
+                return { error: error.message };
+            }
+        }
+
+        async function runTests() {
+            // Test health endpoint
+            resultsDiv.innerHTML += '<h2>Testing Health Endpoint</h2>';
+            const healthResult = await testEndpoint('/health');
+            resultsDiv.innerHTML += `<pre>${JSON.stringify(healthResult, null, 2)}</pre>`;
+
+            // Test subscription plans endpoint
+            resultsDiv.innerHTML += '<h2>Testing Subscription Plans Endpoint</h2>';
+            const plansResult = await testEndpoint('/api/subscriptions/plans');
+            resultsDiv.innerHTML += `<pre>${JSON.stringify(plansResult, null, 2)}</pre>`;
+        }
+
+        runTests();
+    </script>
+</body>
+</html> 

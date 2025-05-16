@@ -1,0 +1,503 @@
+/* Global Styles */
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f5f5f5;
+    --text-color: #333;
+    --border-color: #ddd;
+    --success-color: #4caf50;
+    --error-color: #f44336;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+}
+
+/* Fertile Days Section */
+#fertileDaysInfo {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+}
+
+/* Email Preferences Section */
+#emailPreferences {
+    background-color: #f8f9fa;
+}
+
+#emailPreferences .form-group {
+    margin-bottom: 15px;
+}
+
+#emailPreferences label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+}
+
+#sendTestEmail {
+    background-color: #2ecc71;
+}
+
+#sendTestEmail:hover {
+    background-color: #27ae60;
+}
+
+/* Email Preferences Styles */
+.email-preferences {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.email-preferences h3 {
+    color: #4a4a4a;
+    margin-bottom: 15px;
+}
+
+.preference-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.preference-item label {
+    margin-left: 10px;
+    color: #6c757d;
+}
+
+.preference-item select {
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+#savePreferences {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#savePreferences:hover {
+    background-color: #45a049;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Email Section Styles */
+.email-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.email-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.email-section .input-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.email-section input[type="email"] {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.email-section button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.email-section button:hover {
+    background-color: #2980b9;
+}
+
+#emailStatus {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Health Information Section */
+.input-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.input-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.input-group textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/* Email Preferences Section */
+.preference-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.preference-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.frequency-group {
+    margin: 1rem 0;
+}
+
+.frequency-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Subscription Information */
+.subscription-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.subscription-info h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+#subscriptionDetails {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+#subscriptionDetails p {
+    margin: 0;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 4px;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.button-group button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#saveEntryButton {
+    background-color: #2ecc71;
+    color: white;
+}
+
+#saveEntryButton:hover {
+    background-color: #27ae60;
+}
+
+#calculateButton {
+    background-color: #3498db;
+    color: white;
+}
+
+#calculateButton:hover {
+    background-color: #2980b9;
+}
+
+#resetButton {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#resetButton:hover {
+    background-color: #c0392b;
+}
+
+/* Feature Boxes */
+.feature-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+
+.feature {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.feature p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Egg Count Display */
+.egg-count-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.percentage-info {
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .feature-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .feature {
+        width: 100%;
+    }
+}
+
+/* Calculated Cycle Information */
+.output-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.output-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.output-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.calculated-value {
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-height: 1.5rem;
+}
+
+/* Calculated Section Styles */
+.calculated-section {
+    margin: 1rem 0;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calculated-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.calculated-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.calculated-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.calculated-item label {
+    color: #34495e;
+    font-weight: 500;
+}
+
+.calculated-value {
+    padding: 0.75rem;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-height: 1.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* ... existing styles ... */ 

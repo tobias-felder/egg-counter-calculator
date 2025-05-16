@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Fertility Calculator | Track Your Reproductive Health Timeline</title>
+    <meta name="description" content="Calculate your egg count, track your fertility timeline, and get personalized insights about your reproductive health. Free fertility calculator with age-based projections.">
+    <meta name="keywords" content="fertility calculator, egg count, reproductive health, fertility timeline, ovulation calculator, menstrual cycle tracking">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Fertility Calculator | Track Your Reproductive Health Timeline">
+    <meta property="og:description" content="Calculate your egg count, track your fertility timeline, and get personalized insights about your reproductive health.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com">
+    <meta property="og:image" content="https://your-domain.com/images/fertility-calculator-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Fertility Calculator",
+        "description": "Calculate your egg count, track your fertility timeline, and get personalized insights about your reproductive health.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Egg count calculator",
+            "Fertility timeline projection",
+            "Cycle tracking",
+            "Personalized health insights"
+        ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Reproductive Health Timeline</h1>
+            <p class="description">Track your reproductive health with our integrated timeline calculator</p>
+        </header>
+
+        <main>
+            <div class="feature-list">
+                <div class="feature">
+                    <h3>Real-time Calculations</h3>
+                    <p>Get instant egg count estimates and cycle predictions</p>
+                </div>
+                <div class="feature">
+                    <h3>Comprehensive Tracking</h3>
+                    <p>Monitor your reproductive health over time</p>
+                </div>
+                <div class="feature">
+                    <h3>Future Projections</h3>
+                    <p>See potential changes in your fertility timeline</p>
+                </div>
+            </div>
+
+            <div id="inputArea">
+                <div class="input-section">
+                    <h3>Age Information</h3>
+                    <div class="input-group">
+                        <div>
+                            <label class="age-label">Current Age:</label>
+                            <input type="number" id="ageInput" min="18" max="55" placeholder="Enter age">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>Cycle Information</h3>
+                    <div class="input-group">
+                        <div>
+                            <label>Last Period Start Date:</label>
+                            <input type="date" id="lastPeriod">
+                        </div>
+                        <div>
+                            <label>Average Cycle Length (days):</label>
+                            <input type="number" id="cycleLength" min="21" max="35" placeholder="28">
+                        </div>
+                        <div>
+                            <label>Period Length (days):</label>
+                            <input type="number" id="periodLength" min="2" max="10" placeholder="5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculated-section">
+                    <h3>Calculated Cycle Information</h3>
+                    <div class="calculated-group">
+                        <div class="calculated-item">
+                            <label>Next Period:</label>
+                            <div id="nextPeriod" class="calculated-value">-</div>
+                        </div>
+                        <div class="calculated-item">
+                            <label>Ovulation Day:</label>
+                            <div id="ovulationDay" class="calculated-value">-</div>
+                        </div>
+                        <div class="calculated-item">
+                            <label>Fertile Window:</label>
+                            <div id="fertileWindow" class="calculated-value">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>Health Information</h3>
+                    <div class="input-group">
+                        <div>
+                            <label>Previous Pregnancies:</label>
+                            <input type="number" id="previousPregnancies" min="0" placeholder="0">
+                        </div>
+                        <div>
+                            <label>Previous Surgeries:</label>
+                            <input type="text" id="previousSurgeries" placeholder="List any relevant surgeries">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>Current Symptoms</h3>
+                    <div class="input-group">
+                        <textarea id="symptoms" placeholder="Enter any current symptoms"></textarea>
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>Notes</h3>
+                    <div class="input-group">
+                        <textarea id="notes" placeholder="Enter any additional notes"></textarea>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="calculateButton">Calculate</button>
+                    <button id="saveEntryButton">Save Entry</button>
+                    <button id="resetButton">Reset</button>
+                </div>
+            </div>
+
+            <div class="outputArea">
+                <div id="currentAgeOutput" class="age-content">
+                    <h3>Current Age Analysis</h3>
+                    <div class="egg-count-info">
+                        <div class="percentage-info" id="eggRangeOutput"></div>
+                        <div class="percentage-info" id="eggRangeOutputMinus5"></div>
+                        <div class="percentage-info" id="eggRangeOutputPlus5"></div>
+                    </div>
+                    <div class="percentage-info" id="pastPercentage"></div>
+                    <div class="percentage-info" id="futurePercentage"></div>
+                </div>
+            </div>
+
+            <div class="email-section">
+                <h3>Email Preferences</h3>
+                <div class="input-group">
+                    <input type="email" id="emailInput" placeholder="Enter your email to receive results">
+                    <div class="preference-group">
+                        <label>
+                            <input type="checkbox" id="fertilityUpdates">
+                            Receive Fertility Updates
+                        </label>
+                        <label>
+                            <input type="checkbox" id="cycleReminders">
+                            Receive Cycle Reminders
+                        </label>
+                    </div>
+                    <div class="frequency-group">
+                        <label>Update Frequency:</label>
+                        <select id="updateFrequency">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <button id="sendEmailButton">Send Results</button>
+                </div>
+                <div id="emailStatus"></div>
+            </div>
+
+            <div class="subscription-info">
+                <h3>Subscription Information</h3>
+                <div id="subscriptionDetails">
+                    <p>Current Plan: <span id="currentPlan">Free</span></p>
+                    <p>Features Available: <span id="availableFeatures">Basic Calculator</span></p>
+                    <p>Next Billing Date: <span id="nextBillingDate">N/A</span></p>
+                </div>
+            </div>
+
+            <div id="disclaimer">
+                <p><strong>Disclaimer:</strong> This calculator provides estimates based on general medical knowledge. Individual results may vary. Always consult with your healthcare provider for personalized medical advice.</p>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Email functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('emailInput');
+            const sendEmailButton = document.getElementById('sendEmailButton');
+            const emailStatus = document.getElementById('emailStatus');
+            const fertilityUpdates = document.getElementById('fertilityUpdates');
+            const cycleReminders = document.getElementById('cycleReminders');
+            const updateFrequency = document.getElementById('updateFrequency');
+            const saveEntryButton = document.getElementById('saveEntryButton');
+
+            // Save entry functionality
+            saveEntryButton.addEventListener('click', function() {
+                const entryData = {
+                    lastPeriod: document.getElementById('lastPeriod').value,
+                    cycleLength: document.getElementById('cycleLength').value,
+                    periodLength: document.getElementById('periodLength').value,
+                    previousPregnancies: document.getElementById('previousPregnancies').value,
+                    previousSurgeries: document.getElementById('previousSurgeries').value,
+                    symptoms: document.getElementById('symptoms').value,
+                    notes: document.getElementById('notes').value
+                };
+
+                <script src="script.js"></script>
+</body>
+</html>                

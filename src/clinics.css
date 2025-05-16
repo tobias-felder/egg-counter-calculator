@@ -1,0 +1,16 @@
+body { font-family: Arial, sans-serif; background: #f8f8f8; }
+h1 { text-align: center; color: #2c3e50; }
+#clinic-list { max-width: 700px; margin: 0 auto; }
+.clinic-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 20px 0;
+  padding: 20px;
+  overflow: auto;
+}
+.clinic-card img {
+  border-radius: 8px;
+}
+.clinic-card h2 { margin-top: 0; }
+.clinic-card a { color: #3498db; text-decoration: none; }

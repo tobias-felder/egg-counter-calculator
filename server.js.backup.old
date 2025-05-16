@@ -1,0 +1,171 @@
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose();
+require('dotenv').config();
+
+// Initialize services
+const SubscriptionService = require('./subscription-service/subscriptionService');
+const EmailService = require('./src/services/emailService');
+
+const app = express();
+const PORT = 5000;
+
+// Debug logging
+console.log('Starting server...');
+console.log('Current directory:', process.cwd());
+console.log('Public directory:', path.join(process.cwd(), 'public'));
+console.log('Server will run on port:', PORT);
+
+// Log environment variables (excluding sensitive ones)
+console.log('Environment variables loaded:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('SMTP_HOST:', process.env.SMTP_HOST);
+console.log('SMTP_PORT:', process.env.SMTP_PORT);
+console.log('SMTP_USER:', process.env.SMTP_USER ? 'Set' : 'Not Set');
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Add request logging middleware
+app.use((req, res, next) => {
+    const start = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        console.log(`${new Date().toISOString()} ${req.method} ${req.url} ${res.statusCode} ${duration}ms`);
+    });
+    next();
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err);
+    res.status(500).json({
+        error: 'Internal server error',
+        message: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
+
+// Serve static files from the public directory with no-cache headers
+const publicPath = path.join(process.cwd(), 'public');
+console.log('Serving static files from:', publicPath);
+app.use(express.static(publicPath, {
+    setHeaders: (res, path) => {
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+    }
+}));
+
+// View all subscriptions
+app.get('/api/subscriptions', async (req, res) => {
+    try {
+        const subscriptions = await SubscriptionService.getActiveSubscriptions();
+        res.json({
+            success: true,
+            count: subscriptions.length,
+            subscriptions
+        });
+    } catch (error) {
+        console.error('Error fetching subscriptions:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch subscriptions'
+        });
+    }
+});
+
+// Route for calculator
+app.get('/calculator', (req, res) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    console.log('Calculator path requested');
+    res.sendFile(path.join(process.cwd(), 'src', 'index.html'));
+});
+
+// Initialize SQLite database
+const db = new sqlite3.Database('calculations.db', (err) => {
+    if (err) {
+        console.error('Error opening database:', err);
+    } else {
+        console.log('Connected to SQLite database');
+        db.run(`CREATE TABLE IF NOT EXISTS calculations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            age INTEGER,
+            lastPeriodDate TEXT,
+            estimatedEggCount TEXT,
+            fertilityStatus TEXT,
+            nextPeriod TEXT,
+            ovulationDay TEXT,
+            fertileWindow TEXT,
+            ovulationTime TEXT,
+            email TEXT,
+            phone TEXT,
+            createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        )`);
+    }
+});
+
+// Test endpoint
+app.get('/test', (req, res) => {
+    res.sendFile(path.join(publicPath, 'test.html'));
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
+    });
+});
+
+// Get subscription plans
+app.get('/api/subscriptions/plans', (req, res) => {
+    try {
+        const { SUBSCRIPTION_PLANS } = require('./subscription-service/subscriptionPlans');
+        const plans = Object.values(SUBSCRIPTION_PLANS).map(plan => ({
+            ...plan,
+            stripeProductId: undefined // Don't expose Stripe IDs to the client
+        }));
+        res.json(plans);
+    } catch (error) {
+        console.error('Error fetching subscription plans:', error);
+        res.status(500).json({ error: 'Failed to fetch subscription plans' });
+    }
+});
+
+// Send results endpoint
+app.post('/api/send-results', async (req, res) => {
+    try {
+        const { email, calculatorData, preferences } = req.body;
+        
+        if (!email) {
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Email is required' 
+            });
+        }
+
+        // Send email using the email service
+        await EmailService.sendResults(email, calculatorData, preferences);
+        
+        res.json({ 
+            success: true, 
+            message: 'Results sent successfully' 
+        });
+    } catch (error) {
+        console.error('Error sending results:', error);
+        res.status(500).json({ 
+            success: false, 
+            error: 'Failed to send results' 
+        });
+    }
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
